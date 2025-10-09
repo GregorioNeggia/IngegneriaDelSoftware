@@ -2,59 +2,68 @@ package Versione1;
 import java.util.*;
 
 public class GestioneConfiguratori {
-    private static final String FILENAME = "configuratori.txt";
+   
 
     private static final String USERNAME_ADMIN = "admin";
     private static final String PASSWORD_ADMIN = "admin123";
 
     private List<Configuratore> configuratori;
     
-    public GestioneConfiguratori() {
-        configuratori = new ArrayList<>();
+    public GestioneConfiguratori(List<Configuratore> configuratori) {
+        this.configuratori = configuratori;
     }
 
-    public void faiPrimoAccesso(){
-        boolean conferma = false;
+    public Configuratore faiPrimoAccesso(){
+
+        boolean usernameValido = false;
 
         do{
             String username = Utilità.chiediStringaNonVuota("Inserisci username");
             String password = Utilità.chiediStringaNonVuota("Inserisci password");
-        for(Configuratore c : configuratori){
 
+            boolean usernameEsistente = false;
+            for(Configuratore c : configuratori){
+                if(c.getUsername().equals(username)){
+                    usernameEsistente = true;
+                    break;
+                }
+            }
 
-            if(c.getUsername().equals(username)){
+            if(usernameEsistente){
                 System.out.println("Errore: Username già esistente. Riprova.");
-                break;
-            }
-            else{
-                conferma = true;
-            }
+            } else {
+                
+                Configuratore nuovoConfiguratore = new Configuratore(username, password);
+                configuratori.add(nuovoConfiguratore);
+                Utilità.scriviConfiguratori("configuratori.txt", configuratori);
+                return nuovoConfiguratore;
             }
 
-        }while (conferma == true);
+        } while (!usernameValido);
+
+        return null; 
     }
 
-    public boolean login(String username, String password){
-        boolean log = false;
+    public Configuratore login (){
+        
+        String username = Utilità.chiediStringaNonVuota("Inserisci username");
+        String password = Utilità.chiediStringaNonVuota("Inserisci password");
 
         if(username.equals(USERNAME_ADMIN) && password.equals(PASSWORD_ADMIN)){
-            log = true;
-            faiPrimoAccesso();
+            
+            return faiPrimoAccesso();
         }
         else{
             for(Configuratore c : configuratori){
                 if(c.getUsername().equals(username) && c.getPassword().equals(password)){
-                    log = true;
-                    break;
+                    System.out.println("Login effettuato con successo.");
+                    return c;
                 }
-            }
+            } 
+            System.out.println("Errore: Credenziali non valide. Riprova.");
+            return null;
         }
-        return log;
     }
-
-
-
-
 
 
     public List<Configuratore> getConfiguratori() {

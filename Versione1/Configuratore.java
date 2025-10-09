@@ -5,9 +5,6 @@ public class Configuratore {
     
     private String username;
     private String password;
-    private AmbitoTerritoriale ambitoTerritoriale;
-    private int maxPartecipanti;
-    private List <Luogo> luoghiDisponibili = new ArrayList<>();
 
     public Configuratore(String username, String password) {
         this.username = username;
@@ -15,7 +12,12 @@ public class Configuratore {
     }
 
     
-
+    public String toString() {
+        return "Configuratore{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 
 
     public String getUsername() {
@@ -24,7 +26,7 @@ public class Configuratore {
     public String getPassword() {
         return password;
     }
-    
+
 
 
 }

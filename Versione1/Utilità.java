@@ -6,8 +6,11 @@ import java.io.File;
 import java.io.*;
 
 public class Utilità {
+
+    
     
     private static Scanner scanner = new Scanner(System.in);
+
 
     public static String chiediStringa(String messaggio) {
         System.out.print(messaggio + ": ");
@@ -30,7 +33,7 @@ public class Utilità {
         return input.trim();
     }
     
-    
+
     public static void scriviConfiguratori(String nomeFile, List<Configuratore> configuratori){
         File file = new File(nomeFile);
 
@@ -48,11 +51,11 @@ public class Utilità {
         }
     }
 
-    public static List<Configuratore> leggiConfiguratori(String nomeFile){
+    public static List<Configuratore> leggiConfiguratori(String nomeFileConfiguratori){
 
         List<Configuratore> configuratori = new ArrayList<>();
 
-        File file = new File(nomeFile);
+        File file = new File(nomeFileConfiguratori);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))){
 
