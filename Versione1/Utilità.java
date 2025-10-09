@@ -1,14 +1,17 @@
 package Versione1;
 
 import java.util.*;
+import com.google.gson.*;
+import Versione1.Entità.*;
 
 import java.io.File;
 import java.io.*;
 
+
 public class Utilità {
 
     
-    
+    //METODI DI UTILITA GENERALE
     private static Scanner scanner = new Scanner(System.in);
 
 
@@ -34,16 +37,18 @@ public class Utilità {
     }
     
 
+
+
+    //METODI PER I CONFIGURATORI
+
     public static void scriviConfiguratori(String nomeFile, List<Configuratore> configuratori){
         File file = new File(nomeFile);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
 
-            for(Configuratore c : configuratori){
-                String line = c.getUsername() + "," + c.getPassword();
-                bw.write(line);
-                bw.newLine();
-            }
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(configuratori);
+            bw.write(json);
 
         }
         catch (IOException e){
@@ -59,21 +64,25 @@ public class Utilità {
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))){
 
-            String line;
-            while((line = br.readLine()) != null){
-                String[] parts = line.split(",");
-                if(parts.length == 2){
-                    String username = parts[0].trim();
-                    String password = parts[1].trim();
-                    Configuratore configuratore = new Configuratore(username, password);
-                    configuratori.add(configuratore);
-                }
-            }
-
+            Gson gson = new Gson();
+            List<Configuratore> configuratoriDaFile = Arrays.asList(gson.fromJson(br, Configuratore[].class));
+            configuratori.addAll(configuratoriDaFile);
         }
         catch (IOException e){
             System.out.println("Errore nella lettura del file: " + e.getMessage());
         }
         return configuratori;
+    }
+
+    public static void stampaConfiguratori(List<Configuratore> configuratori){
+        for(Configuratore c : configuratori){
+            System.out.println(c.toString());
+        }
+    }
+
+
+    //METODI PER I LUOGHI DI INTERESSE
+    public void aggiungiLuogo(Configuratore c, Luogo luogo){
+        c.aggiungiLuogo(luogo);
     }
 }

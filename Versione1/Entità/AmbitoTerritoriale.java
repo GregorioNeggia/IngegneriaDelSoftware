@@ -1,4 +1,4 @@
-package Versione1;
+package Versione1.Entità;
 
 public class AmbitoTerritoriale {
 

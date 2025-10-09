@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Esegui Main",
+            "request": "launch",
+            "mainClass": "Versione1.Main",
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}/lib/gson-2.13.1.jar"
+            ],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
