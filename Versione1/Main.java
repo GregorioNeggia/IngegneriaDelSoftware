@@ -9,11 +9,9 @@ public class Main {
     
 
     public static void main(String[] args) {
-        List<Configuratore> configuratori = Utilità.leggiConfiguratori(DEFAULT_FILE_CONFIGURATORI);
-        GestioneConfiguratori gestione = new GestioneConfiguratori(configuratori);
-        Utilità.stampaConfiguratori(configuratori);
-        Configuratore configuratore = gestione.login();
-
+        
+        Menu menu = new Menu();
+        menu.mostraMenu();
         
 
 
