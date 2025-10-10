@@ -6,13 +6,11 @@ public class Configuratore {
     private String username;
     private String password;
     private List<Luogo> luoghiInteresse;
-    private List<Volontario> volontari;
 
-    public Configuratore(String username, String password, List<Luogo> luoghi, List<Volontario> volontari) {
+    public Configuratore(String username, String password, List<Luogo> luoghi) {
         this.username = username;
         this.password = password;
-        this.luoghiInteresse = luoghi;
-        this.volontari = volontari;
+        this.luoghiInteresse = luoghi != null ? luoghi : new ArrayList<Luogo>();
     }
 
     public void aggiungiLuogo(Luogo luogo) {
@@ -24,8 +22,7 @@ public class Configuratore {
         return "Configuratore{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", luoghiInteresse=" + luoghiInteresse + '\'' +
-                ", volontari=" + volontari + '\'' + 
+                ", luoghiInteresse=" + luoghiInteresse.toString() + '\'' +
                 '}';
     }
 

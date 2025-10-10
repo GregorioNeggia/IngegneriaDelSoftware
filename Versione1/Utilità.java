@@ -39,9 +39,9 @@ public class Utilità {
 
 
 
-    //METODI PER I CONFIGURATORI
+    //METODI PER JSON
 
-    public static void scriviConfiguratori(String nomeFile, List<Configuratore> configuratori){
+    public static void scriviJSon(String nomeFile, List<Configuratore> configuratori){
         File file = new File(nomeFile);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
@@ -56,11 +56,11 @@ public class Utilità {
         }
     }
 
-    public static List<Configuratore> leggiConfiguratori(String nomeFileConfiguratori){
+    public static List<Configuratore> leggiJSon(String nomeFile){
 
         List<Configuratore> configuratori = new ArrayList<>();
 
-        File file = new File(nomeFileConfiguratori);
+        File file = new File(nomeFile);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))){
 
@@ -81,8 +81,5 @@ public class Utilità {
     }
 
 
-    //METODI PER I LUOGHI DI INTERESSE
-    public void aggiungiLuogo(Configuratore c, Luogo luogo){
-        c.aggiungiLuogo(luogo);
-    }
+    
 }

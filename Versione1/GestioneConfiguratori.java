@@ -18,19 +18,21 @@ public class GestioneConfiguratori {
         this.configuratori = configuratori;
     }
 
-    public Configuratore faiPrimoAccesso(){
+    public String[] faiPrimoAccesso(){
 
         boolean usernameValido = false;
 
         System.out.println(BENVENUTO_PRIMO_ACCESSO);
 
+        String[] credenziali = new String[2];
+
         do{
-            String username = Utilità.chiediStringaNonVuota(RICHIESTA_USER);
-            String password = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
+            credenziali[0] = Utilità.chiediStringaNonVuota(RICHIESTA_USER);
+            
 
             boolean usernameEsistente = false;
             for(Configuratore c : configuratori){
-                if(c.getUsername().equals(username)){
+                if(c.getUsername().equals(credenziali[0])){
                     usernameEsistente = true;
                     break;
                 }
@@ -40,11 +42,8 @@ public class GestioneConfiguratori {
                 System.out.println("Errore: Username già esistente. Riprova.");
 
             } else {
-                
-                Configuratore nuovoConfiguratore = new Configuratore(username, password, null, null);
-                configuratori.add(nuovoConfiguratore);
-                Utilità.scriviConfiguratori("configuratori.json", configuratori);
-                return nuovoConfiguratore;
+                credenziali[1] = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
+                return credenziali;
             }
 
         } while (!usernameValido);
@@ -56,17 +55,23 @@ public class GestioneConfiguratori {
 
     public Configuratore login (){
 
+
         String username = Utilità.chiediStringaNonVuota(RICHIESTA_USER);
         String password = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
 
-        if(username.equals(USERNAME_ADMIN) && password.equals(PASSWORD_ADMIN)){
+        if(username.equals(configuratori.get(0).getUsername()) && password.equals(configuratori.get(0).getPassword())){
             
-            return faiPrimoAccesso();
+            String[] credenziali = faiPrimoAccesso();
+            Configuratore nuovoConfiguratore = setupConfiguratore(credenziali[0], credenziali[1]);
+            configuratori.add(nuovoConfiguratore);
+            Utilità.scriviJSon("configuratori.json", configuratori);
+            System.out.println("Account creato con successo. Login effettuato.");
+            return nuovoConfiguratore;
+            
         }
         else{
             for(Configuratore c : configuratori){
                 if(c.getUsername().equals(username) && c.getPassword().equals(password)){
-                    System.out.println("Login effettuato con successo.");
                     return c;
                 }
             } 
@@ -80,32 +85,42 @@ public class GestioneConfiguratori {
         return configuratori;
     }
 
-    public void setupConfiguratore(Configuratore configuratore) {
+    public Configuratore setupConfiguratore(String username, String password){
+
+        List<Luogo> luoghi = new ArrayList<>();
+
         do {
             String nomeLuogo = Utilità.chiediStringaNonVuota("Inserisci il nome del luogo di interesse (o 'fine' per terminare): ");
+            if(nomeLuogo.equalsIgnoreCase("fine")){
+                break;
+            }
             String nomeVolontario = Utilità.chiediStringaNonVuota("Inserisci il nome del volontario assegnato al luogo: ");
             String cognomeVolontario = Utilità.chiediStringaNonVuota("Inserisci il cognome del volontario assegnato al luogo: ");
             Volontario volontario = new Volontario(nomeVolontario, cognomeVolontario);
-            if (nomeLuogo.equalsIgnoreCase("fine")) {
-                break;
-            }
+            
             Luogo nuovoLuogo = new Luogo(nomeLuogo, volontario);
-            configuratore.aggiungiLuogo(nuovoLuogo);
+            luoghi.add(nuovoLuogo);
+            System.out.println("Luogo aggiunto con successo: " + nuovoLuogo.toString());
         } while (true);
+
+        return new Configuratore(username, password, luoghi);
     }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Configuratore c : configuratori) {
-            sb.append(c.toString()).append("\n");
-        }
-        return sb.toString();
+    public void aggiungiLuogo(Configuratore c, Luogo luogo){
+        c.aggiungiLuogo(luogo);
     }
 
-    public void setupVolontari(Configuratore configuratore){
+    public void modificaConfiguratore(Configuratore c){
 
     }
 
+    
+
+    public void stampaInfo(Configuratore c){
+        System.out.println(c.toString());
+    }
+
+    
 
 
     

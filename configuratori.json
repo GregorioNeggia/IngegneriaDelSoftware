@@ -1,8 +1,41 @@
 [
   {
-    "username": "prova",
-    "password": "daje"
+    "username": "admin",
+    "password": "admin123",
+    "luoghiInteresse": []
+  },
+  {
+    "username": "greg",
+    "password": "prova",
+    "luoghiInteresse": [
+      {
+        "nome": "saifj",
+        "volontarioAssegnato": {
+          "nome": "disfjsdo",
+          "cognome": "dsfi"
+        }
+      },
+      {
+        "nome": "dsfo",
+        "volontarioAssegnato": {
+          "nome": "difj",
+          "cognome": "cdijf"
+        }
+      },
+      {
+        "nome": "dsfihjdsofgir",
+        "volontarioAssegnato": {
+          "nome": "dsfidsjfd",
+          "cognome": "sfjdsiv"
+        }
+      },
+      {
+        "nome": "dsvjidsv",
+        "volontarioAssegnato": {
+          "nome": "dsvjidsov",
+          "cognome": "vdsivj"
+        }
+      }
+    ]
   }
-
-  
 ]

@@ -14,8 +14,8 @@ public class Luogo {
     @Override
     public String toString() {
         return "Luogo{" +
-                "nome='" + nome + '\'' +
-                ", volontarioAssegnato=" + volontarioAssegnato +
+                "nome ='" + nome + '\n' +
+                ", volontarioAssegnato=" + volontarioAssegnato.toString() + '\n' +
                 '}';
     }
     
