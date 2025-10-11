@@ -5,24 +5,23 @@ public class Configuratore {
     
     private String username;
     private String password;
-    private List<Luogo> luoghiInteresse;
+    private List<Luogo> luoghi;
+    private List<Volontario> volontari;
 
-    public Configuratore(String username, String password, List<Luogo> luoghi) {
+    public Configuratore(String username, String password, List<Luogo> luoghi, List<Volontario> volontari) {
         this.username = username;
         this.password = password;
-        this.luoghiInteresse = luoghi != null ? luoghi : new ArrayList<Luogo>();
+        this.luoghi = luoghi != null ? luoghi : new ArrayList<Luogo>();
+        this.volontari = volontari != null ? volontari : new ArrayList<Volontario>();
     }
 
-    public void aggiungiLuogo(Luogo luogo) {
-        luoghiInteresse.add(luogo);
-    }
-
-    
+    @Override
     public String toString() {
         return "Configuratore{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", luoghiInteresse=" + luoghiInteresse.toString() + '\'' +
+                ", luoghi=" + luoghi.toString() + '\'' +
+                ", volontari=" + volontari.toString() + '\'' +
                 '}';
     }
 
@@ -34,8 +33,13 @@ public class Configuratore {
         return password;
     }
 
-    public List<Luogo> getLuoghiInteresse() {
-        return luoghiInteresse;
+
+    public List<Luogo> getLuoghi() {
+        return luoghi;
+    }
+
+    public void aggiungiLuogo(Luogo luogo) {
+        luoghi.add(luogo);
     }
 
 

@@ -1,13 +1,12 @@
-package Versione1;
+package Versione1.Gestori;
+import java.io.ObjectInputFilter.Config;
 import java.util.*;
 
+import Versione1.Utilità;
 import Versione1.Entità.*;
 
 public class GestioneConfiguratori {
    
-
-    private static final String USERNAME_ADMIN = "admin";
-    private static final String PASSWORD_ADMIN = "admin123";
     private static final String RICHIESTA_USER = "Inserisci username: \n";
     private static final String RICHIESTA_PASSWORD = "Inserisci password: \n";
     private static final String BENVENUTO_PRIMO_ACCESSO = "Benvenuto! Effettua il primo accesso creando un nuovo account configuratore.";
@@ -64,7 +63,7 @@ public class GestioneConfiguratori {
             String[] credenziali = faiPrimoAccesso();
             Configuratore nuovoConfiguratore = setupConfiguratore(credenziali[0], credenziali[1]);
             configuratori.add(nuovoConfiguratore);
-            Utilità.scriviJSon("configuratori.json", configuratori);
+            Utilità.scriviJSonConfiguratori("configuratori.json", configuratori);
             System.out.println("Account creato con successo. Login effettuato.");
             return nuovoConfiguratore;
             
@@ -85,30 +84,27 @@ public class GestioneConfiguratori {
         return configuratori;
     }
 
+
+    //DA MODIFICARE PER IMPLEMENTARE LA CREAZIONE DI LUOGHI E VOLONTARI
     public Configuratore setupConfiguratore(String username, String password){
-
+        boolean fine = false;
         List<Luogo> luoghi = new ArrayList<>();
+        List<Volontario> volontari = new ArrayList<>();
+        try{
+            while(!fine){}
 
-        do {
-            String nomeLuogo = Utilità.chiediStringaNonVuota("Inserisci il nome del luogo di interesse (o 'fine' per terminare): ");
-            if(nomeLuogo.equalsIgnoreCase("fine")){
-                break;
-            }
-            String nomeVolontario = Utilità.chiediStringaNonVuota("Inserisci il nome del volontario assegnato al luogo: ");
-            String cognomeVolontario = Utilità.chiediStringaNonVuota("Inserisci il cognome del volontario assegnato al luogo: ");
-            Volontario volontario = new Volontario(nomeVolontario, cognomeVolontario);
-            
-            Luogo nuovoLuogo = new Luogo(nomeLuogo, volontario);
-            luoghi.add(nuovoLuogo);
-            System.out.println("Luogo aggiunto con successo: " + nuovoLuogo.toString());
-        } while (true);
 
-        return new Configuratore(username, password, luoghi);
+
+
+        }
+        catch(Exception e){
+            System.out.println("Errore durante la creazione del configuratore: " + e.getMessage());
+        }
+
+        return new Configuratore(username, password, luoghi, volontari);
     }
 
-    public void aggiungiLuogo(Configuratore c, Luogo luogo){
-        c.aggiungiLuogo(luogo);
-    }
+    
 
     public void modificaConfiguratore(Configuratore c){
 

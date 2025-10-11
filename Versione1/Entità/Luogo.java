@@ -1,22 +1,32 @@
 package Versione1.Entità;
+import java.util.*;
 
 public class Luogo {
 
     private String nome;
+    private String descrizione;
+    private String posizione;
+    private List<Visita> visite;
 
-    private Volontario volontarioAssegnato;
-
-    public Luogo(String nome, Volontario volontarioAssegnato) {
+    public Luogo(String nome, String descrizione, String posizione, List<Visita> visite) {
         this.nome = nome;
-        this.volontarioAssegnato = volontarioAssegnato;
+        this.descrizione = descrizione;
+        this.posizione = posizione;
+        this.visite = visite != null ? visite : new ArrayList<Visita>();
     }
+
 
     @Override
     public String toString() {
-        return "Luogo{" +
-                "nome ='" + nome + '\n' +
-                ", volontarioAssegnato=" + volontarioAssegnato.toString() + '\n' +
-                '}';
+        return "Luogo { " +
+                "nome = " + nome + '\n' +
+                ", descrizione = " + descrizione + '\n' +
+                ", posizione = " + posizione + '\n' +
+                ", visite = " + visite.toString() + '\n' +
+                " }";
     }
-    
+
 }
+
+    
+

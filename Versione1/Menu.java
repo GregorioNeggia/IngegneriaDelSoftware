@@ -2,6 +2,7 @@
 package Versione1;
 import java.util.*;
 import Versione1.Entità.*;
+import Versione1.Gestori.GestioneConfiguratori;
 
 public class Menu {
     
@@ -20,7 +21,7 @@ public class Menu {
             
             switch(scelta) {
                 case 1:
-                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJSon("configuratori.json"));
+                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJSonConfiguratori("configuratori.json"));
                     Configuratore configuratore = gestione.login();
                     if (configuratore != null) {
                         System.out.println("Login effettuato: " + configuratore.getUsername());
@@ -30,7 +31,7 @@ public class Menu {
 
                     break;
                 case 2:
-                    List<Configuratore> configuratori = Utilità.leggiJSon("configuratori.json");
+                    List<Configuratore> configuratori = Utilità.leggiJSonConfiguratori("configuratori.json");
                     System.out.println("\n=== CONFIGURATORI REGISTRATI ===");
                     Utilità.stampaConfiguratori(configuratori);
                     break;

@@ -2,20 +2,22 @@ package Versione1.Entità;
 
 public class Volontario {
 
-    private String nome;
-    private String cognome;
+    private String user;
+    
 
-    public Volontario(String nome, String cognome) {
-        this.nome = nome;
-        this.cognome = cognome;
+    public Volontario(String user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
         return "Volontario{" +
-                "nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
+                ", user='" + user + '\'' +
                 '}';
+    }
+
+    public String getUser() {
+        return user;
     }
 
 }
