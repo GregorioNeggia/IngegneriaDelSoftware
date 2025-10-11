@@ -5,18 +5,33 @@ import java.util.*;
 import Versione1.Utilità;
 import Versione1.Entità.*;
 
+import static Versione1.Utilità.scanner;
+
+
 public class GestioneConfiguratori {
-   
+
+//  ATTRIBUTI
     private static final String RICHIESTA_USER = "Inserisci username: \n";
     private static final String RICHIESTA_PASSWORD = "Inserisci password: \n";
     private static final String BENVENUTO_PRIMO_ACCESSO = "Benvenuto! Effettua il primo accesso creando un nuovo account configuratore.";
 
     private List<Configuratore> configuratori;
-    
+
+//  COTRUTTORE
     public GestioneConfiguratori(List<Configuratore> configuratori) {
+
         this.configuratori = configuratori;
     }
 
+//  METODI
+
+//    getter e setter
+    public List<Configuratore> getConfiguratori() {
+        return configuratori;
+    }
+
+
+//    primo accesso
     public String[] faiPrimoAccesso(){
 
         boolean usernameValido = false;
@@ -27,7 +42,6 @@ public class GestioneConfiguratori {
 
         do{
             credenziali[0] = Utilità.chiediStringaNonVuota(RICHIESTA_USER);
-            
 
             boolean usernameEsistente = false;
             for(Configuratore c : configuratori){
@@ -42,6 +56,7 @@ public class GestioneConfiguratori {
 
             } else {
                 credenziali[1] = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
+                InizializzazioneApp();
                 return credenziali;
             }
 
@@ -50,10 +65,21 @@ public class GestioneConfiguratori {
         return null; 
     }
 
-    
+    //  primo accesso
+    public void InizializzazioneApp(){
+        PrimoAvvioData[] dati = Utilità.leggiJsonInArray("PrimoAvvio.json", PrimoAvvioData[].class).toArray(new PrimoAvvioData[0]);
+        PrimoAvvioData avvio = (dati.length > 0) ? dati[0] : new PrimoAvvioData();
 
+        if ("".equals(avvio.getAmbitoTerritoriale())) {
+            avvio.setAmbitoTerritoriale(Utilità.chiediStringaNonVuota( "Indica città di competenza:"));
+            avvio.setNumMaxIscrizioni(Utilità.leggiIntero(scanner, "scrivi il numero massimo di persone che posso iscriversi ad una visita: "));
+        }
+        Utilità.scriviArrayInJson("PrimoAvvio.json", new PrimoAvvioData[]{avvio});
+        System.out.println("Primo avvio avvenuto con successo");
+        }
+
+//    LOGIN
     public Configuratore login (){
-
 
         String username = Utilità.chiediStringaNonVuota(RICHIESTA_USER);
         String password = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
@@ -62,6 +88,7 @@ public class GestioneConfiguratori {
             
             String[] credenziali = faiPrimoAccesso();
             Configuratore nuovoConfiguratore = setupConfiguratore(credenziali[0], credenziali[1]);
+
             configuratori.add(nuovoConfiguratore);
             Utilità.scriviJSonConfiguratori("configuratori.json", configuratori);
             System.out.println("Account creato con successo. Login effettuato.");
@@ -80,9 +107,7 @@ public class GestioneConfiguratori {
     }
 
 
-    public List<Configuratore> getConfiguratori() {
-        return configuratori;
-    }
+
 
 
     //DA MODIFICARE PER IMPLEMENTARE LA CREAZIONE DI LUOGHI E VOLONTARI

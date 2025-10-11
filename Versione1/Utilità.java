@@ -12,7 +12,7 @@ public class Utilità {
 
     
     //METODI DI UTILITA GENERALE
-    private static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
 
     public static String chiediStringa(String messaggio) {
@@ -175,7 +175,31 @@ public class Utilità {
         }
     }
 
-    
+
+
+//      LETTURA E SCRITTURA GENERALE DA FILE JSON IN UN ARRAY
+        public static <T> List<T> leggiJsonInArray(String nomeFile, Class<T[]> classeArray) {
+            T[] arrayElementi = null;
+
+            try (BufferedReader br = new BufferedReader(new FileReader(nomeFile))) {
+                Gson gson = new Gson();
+                arrayElementi = gson.fromJson(br, classeArray);
+            } catch (IOException e) {
+                System.out.println("Errore nella lettura del file: " + e.getMessage());
+            }
+
+            return List.of(arrayElementi);
+        }
+
+        public static <T> void scriviArrayInJson(String nomeFile, T[] arrayElementi) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomeFile))) {
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String json = gson.toJson(arrayElementi);
+                bw.write(json);
+            } catch (IOException e) {
+                System.out.println("Errore nella scrittura del file: " + e.getMessage());
+            }
+        }
 
 
     
