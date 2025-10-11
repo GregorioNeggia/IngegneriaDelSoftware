@@ -37,17 +37,22 @@ public class Utilità {
     }
 
     public static int leggiIntero(Scanner scanner, String messaggio) {
-    while (true) {
         System.out.print(messaggio);
-        try {
-            int numero = scanner.nextInt();
-            scanner.nextLine(); // pulisce il buffer
-            return numero;
-        } catch (InputMismatchException e) {
-            System.out.println("Input non valido! Inserisci un numero.");
-            scanner.nextLine(); // pulisce input errato
+        while (!scanner.hasNextInt()) {
+            System.out.print("Input non valido. Inserisci un numero intero:");
+            scanner.next();
         }
-        }
+        return scanner.nextInt();
+//    while (true) {
+//        try {
+//            int numero = scanner.nextInt();
+//            scanner.nextLine(); // pulisce il buffer
+//            return numero;
+//        } catch (InputMismatchException e) {
+//            System.out.println("Input non valido! Inserisci un numero.");
+//            scanner.nextLine(); // pulisce input errato
+//        }
+//        }
     }
 
     public static Data creaData(String messaggio){

@@ -30,8 +30,8 @@ public class MenuInterno {
                 System.out.println("0. Logout");
                 
                 scelta = Utilità.leggiIntero(scanner, "Inserisci la tua scelta: ");
-                scanner.nextLine(); 
-                
+                scanner.nextLine();
+
                 switch(scelta) {
                     case 1:
                         gestioneConfiguratori.modificaConfiguratore(conf);

@@ -15,9 +15,8 @@ public class Menu {
             System.out.println("1. Login");
             System.out.println("2. Stampa configuratori");
             System.out.println("0. Esci");
-            System.out.print("Inserisci la tua scelta: ");
-            
-            scelta = scanner.nextInt();
+
+            scelta = Utilità.leggiIntero(scanner, "Inserisci la tua scelta: ");
             
             switch(scelta) {
                 case 1:
