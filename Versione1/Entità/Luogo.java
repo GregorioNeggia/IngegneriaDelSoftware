@@ -15,6 +15,15 @@ public class Luogo {
         this.visite = visite != null ? visite : new ArrayList<Visita>();
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void aggiungiVisita(Visita visita) {
+        this.visite.add(visita);
+    }
+
+
 
     @Override
     public String toString() {

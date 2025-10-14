@@ -1,41 +1,30 @@
 [
   {
     "username": "admin",
-    "password": "admin123",
-    "luoghiInteresse": []
+    "password": "admin123"
   },
   {
-    "username": "greg",
+    "username": "porcoddio",
+    "password": "ciao",
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "prova1",
     "password": "prova",
-    "luoghiInteresse": [
-      {
-        "nome": "saifj",
-        "volontarioAssegnato": {
-          "nome": "disfjsdo",
-          "cognome": "dsfi"
-        }
-      },
-      {
-        "nome": "dsfo",
-        "volontarioAssegnato": {
-          "nome": "difj",
-          "cognome": "cdijf"
-        }
-      },
-      {
-        "nome": "dsfihjdsofgir",
-        "volontarioAssegnato": {
-          "nome": "dsfidsjfd",
-          "cognome": "sfjdsiv"
-        }
-      },
-      {
-        "nome": "dsvjidsv",
-        "volontarioAssegnato": {
-          "nome": "dsvjidsov",
-          "cognome": "vdsivj"
-        }
-      }
-    ]
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "provasss",
+    "password": "porrrr",
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "prova1233",
+    "password": "prova",
+    "luoghi": [],
+    "volontari": []
   }
 ]

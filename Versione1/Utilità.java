@@ -3,7 +3,6 @@ package Versione1;
 import java.util.*;
 import com.google.gson.*;
 import Versione1.Entità.*;
-import Versione1.Gestori.GestoreVolontari;
 
 import java.io.*;
 
@@ -36,65 +35,23 @@ public class Utilità {
         return input.trim();
     }
 
-    public static int leggiIntero(Scanner scanner, String messaggio) {
+    public static int leggiIntero(String messaggio) {
         System.out.print(messaggio);
         while (!scanner.hasNextInt()) {
             System.out.print("Input non valido. Inserisci un numero intero:");
             scanner.next();
         }
         return scanner.nextInt();
-//    while (true) {
-//        try {
-//            int numero = scanner.nextInt();
-//            scanner.nextLine(); // pulisce il buffer
-//            return numero;
-//        } catch (InputMismatchException e) {
-//            System.out.println("Input non valido! Inserisci un numero.");
-//            scanner.nextLine(); // pulisce input errato
-//        }
-//        }
     }
 
     public static Data creaData(String messaggio){
         System.out.println(messaggio);
-        int giorno = Utilità.leggiIntero(scanner, "Inserisci il giorno (1-31): ");
-        int mese = Utilità.leggiIntero(scanner, "Inserisci il mese (1-12): ");
-        int anno = Utilità.leggiIntero(scanner, "Inserisci l'anno (es. 2023): ");
+        int giorno = Utilità.leggiIntero( "Inserisci il giorno (1-31): ");
+        int mese = Utilità.leggiIntero("Inserisci il mese (1-12): ");
+        int anno = Utilità.leggiIntero( "Inserisci l'anno (es. 2023): ");
         return new Data(giorno, mese, anno);
     }
-    
 
-    
-    public void creaLuogo(Configuratore c){
-    }
-
-
-
-    public Visita CreaVisita(){
-
-        try {
-            String titolo = Utilità.chiediStringaNonVuota("Inserisci il nome della visita: ");
-            String descrizione = Utilità.chiediStringaNonVuota("Inserisci la descrizione della visita: ");
-            String puntoIncontro = Utilità.chiediStringaNonVuota("Inserisci il punto di incontro della visita: ");
-            Data dataVisita = Utilità.creaData("Inserisci la data della visita: ");
-            Data dataInizio = Utilità.creaData("Inserisci la data di inizio della visita: ");
-            Data dataFine = Utilità.creaData("Inserisci la data di fine della visita: ");
-            boolean biglietto = Utilità.chiediStringaNonVuota("La visita richiede un biglietto? (si/no): ").equalsIgnoreCase("si");
-            String orario = Utilità.chiediStringaNonVuota("Inserisci l'orario della visita (es. 10:00): ");
-            String durata = Utilità.chiediStringaNonVuota("Inserisci la durata della visita (es. 2 ore): ");
-            String[] giorniDisponibili = Utilità.chiediStringaNonVuota("Inserisci i giorni disponibili separati da virgola (es. lunedì,mercoledì,venerdì): ").split(",");
-            int numeroMinimo = Utilità.leggiIntero(scanner, "Inserisci il numero minimo di partecipanti: ");
-            int numeroMassimo = Utilità.leggiIntero(scanner, "Inserisci il numero massimo di partecipanti: ");
-            Volontario volontario = new GestoreVolontari(null).creaVolontario();
-
-            return new Visita(titolo, descrizione, puntoIncontro, dataVisita, dataInizio, dataFine, biglietto, orario, durata, giorniDisponibili, numeroMinimo, numeroMassimo, volontario);
-            
-        } catch (Exception e) {
-            System.out.println("Errore durante la creazione della visita: " + e.getMessage());
-        }
-
-        return null;
-    }
 
     //METODI PER JSON
 
@@ -142,7 +99,8 @@ public class Utilità {
         }
     }
 
-    public static List<Volontario> leggiJSonVolontari(String nomeFile){
+    public static List<Volontario> leggiJSonVolontari(){
+        String nomeFile = "volontari.json";
 
         List<Volontario> volontari = new ArrayList<>();
 
@@ -174,6 +132,24 @@ public class Utilità {
             System.out.println("Errore nella scrittura del file: " + e.getMessage());
         }
     }
+
+    public static void scriviJsonConfigurazione(PrimoAvvioData dati){
+        String nomeFile = "PrimoAvvio.json";
+        File file = new File(nomeFile);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(dati);
+            bw.write(json);
+
+        }
+        catch (IOException e){
+            System.out.println("Errore nella scrittura del file: " + e.getMessage());
+            }
+        }
+
+
 
 
 
