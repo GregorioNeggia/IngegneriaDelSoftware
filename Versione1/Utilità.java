@@ -64,7 +64,7 @@ public class Utilità {
 
     //METODI PER JSON
 
-    public static void scriviJSonConfiguratori(String nomeFile, List<Configuratore> configuratori) {
+ /*   public static void scriviJSonConfiguratori(String nomeFile, List<Configuratore> configuratori) {
         File file = new File(nomeFile);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
@@ -166,7 +166,7 @@ public class Utilità {
 
         return List.of(arrayElementi);
     }
-
+*/
 
     //    LEGGI LISTA E SCRIVI LISTA E NON ARRAY
     public static <T> void scriviListaInJson(String nomeFile, List<T> listaElementi) {
