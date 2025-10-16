@@ -9,7 +9,6 @@ import Versione1.Utilità;
 public class Menu {
     
     public void mostraMenu() {
-        Scanner scanner = new Scanner(System.in);
         int scelta;
         
         do {
@@ -22,7 +21,8 @@ public class Menu {
             
             switch(scelta) {
                 case 1:
-                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJSonConfiguratori("configuratori.json"));
+//                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJSonConfiguratori("configuratori.json"));
+                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJsonInLista("configuratori.json", Configuratore.class));
                     GestioneApp app =  new GestioneApp();
                     Configuratore configuratore = gestione.login();
                     if (configuratore != null) {
@@ -34,9 +34,13 @@ public class Menu {
 
                     break;
                 case 2:
-                    List<Configuratore> configuratori = Utilità.leggiJSonConfiguratori("configuratori.json");
+//                    List<Configuratore> configuratori = Utilità.leggiJSonConfiguratori("configuratori.json");
+                    List<Configuratore> configuratori =Utilità.leggiJsonInLista("configuratori.json", Configuratore.class);
                     System.out.println("\n=== CONFIGURATORI REGISTRATI ===");
-                    Utilità.stampaConfiguratori(configuratori);
+//                    Utilità.stampaConfiguratori(configuratori);
+                    for(Configuratore c : configuratori) {
+                        System.out.println(c.toString());
+                    }
                     break;
                 case 0:
                     System.out.println("Arrivederci!");
@@ -45,8 +49,7 @@ public class Menu {
                     System.out.println("Scelta non valida!");
             }
         } while(scelta != 0);
-        
-        scanner.close();
+
     }
 }
 

@@ -78,7 +78,7 @@ public class GestioneConfiguratori {
             Configuratore nuovoConfiguratore = new Configuratore(credenziali[0], credenziali[1],null, null);
 
             configuratori.add(nuovoConfiguratore);
-            Utilità.scriviJSonConfiguratori("configuratori.json", configuratori);
+            Utilità.scriviListaInJson("configuratori.json", configuratori);
             System.out.println("Account creato con successo. Login effettuato.");
             return nuovoConfiguratore;
             

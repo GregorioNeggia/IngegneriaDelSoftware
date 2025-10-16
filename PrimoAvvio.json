@@ -1,4 +1,6 @@
-{
-  "ambitoTerritoriale": "brescia",
-  "numMaxIscrizioni": 23
-}
+[
+  {
+    "ambitoTerritoriale": "brescia",
+    "numMaxIscrizioni": 29
+  }
+]

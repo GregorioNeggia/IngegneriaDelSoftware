@@ -2,106 +2,38 @@
   {
     "nome": "Museo Archeologico",
     "descrizione": "Museo con reperti storici",
-    "posizione": "Via Roma 10, Milano",
-    "visite": [
+    "tipiVisita": []
+  },
+  {
+    "nome": "castello",
+    "descrizione": "castello di brescia veramente brutto",
+    "collocazioneGeografica": "brescia",
+    "tipiVisita": [
       {
-        "titolo": "Visita guidata alle sale romane",
-        "descrizione": "Tour delle sale dedicate all'antica Roma",
-        "puntoIncontro": "Ingresso principale",
-        "dataVisita": {"giorno": 15, "mese": 10, "anno": 2025},
-        "dataInizio": {"giorno": 15, "mese": 10, "anno": 2025},
-        "dataFine": {"giorno": 15, "mese": 10, "anno": 2025},
-        "biglietto": true,
-        "orario": "10:00",
-        "durata": "2h",
-        "giorniDisponibili": ["Lunedì", "Mercoledì"],
-        "numeroMinimo": 5,
-        "numeroMassimo": 20,
-        "volontario": {"user": "mario.rossi"}
-      },
-      {
-        "titolo": "Laboratorio bambini",
-        "descrizione": "Attività didattica per bambini",
-        "puntoIncontro": "Sala didattica",
-        "dataVisita": {"giorno": 18, "mese": 10, "anno": 2025},
-        "dataInizio": {"giorno": 18, "mese": 10, "anno": 2025},
-        "dataFine": {"giorno": 18, "mese": 10, "anno": 2025},
-        "biglietto": false,
-        "orario": "14:00",
-        "durata": "1h",
-        "giorniDisponibili": ["Martedì", "Giovedì"],
-        "numeroMinimo": 8,
-        "numeroMassimo": 25,
-        "volontario": {"user": "luca.verdi"}
-      },
-      {
-        "titolo": "Visita notturna",
-        "descrizione": "Tour serale con guida",
-        "puntoIncontro": "Cortile interno",
-        "dataVisita": {"giorno": 20, "mese": 10, "anno": 2025},
-        "dataInizio": {"giorno": 20, "mese": 10, "anno": 2025},
-        "dataFine": {"giorno": 20, "mese": 10, "anno": 2025},
-        "biglietto": true,
-        "orario": "21:00",
-        "durata": "1.5h",
-        "giorniDisponibili": ["Venerdì", "Sabato"],
-        "numeroMinimo": 6,
-        "numeroMassimo": 18,
-        "volontario": {"user": "anna.neri"}
+        "titolo": "IL CASTELLO BRUTTO IN CULO",
+        "descrizione": "NA MERDA",
+        "puntoIncontro": "CASA DI GREG",
+        "dataInizio": "2026-01-13",
+        "dataFine": "2026-01-18",
+        "giorniSettimanali": [
+          "LUNEDI",
+          "MARTEDI"
+        ],
+        "oraInizio": "05:50:00",
+        "durata": 50,
+        "bigliettoNecessario": true,
+        "partecipantiMin": 40,
+        "partecipantiMax": 40,
+        "volontariAssociati": [
+          "spe"
+        ]
       }
     ]
   },
   {
-    "nome": "Parco Naturale",
-    "descrizione": "Area verde protetta",
-    "posizione": "Via delle Querce 5, Torino",
-    "visite": [
-      {
-        "titolo": "Passeggiata ecologica",
-        "descrizione": "Escursione guidata nel parco",
-        "puntoIncontro": "Centro visitatori",
-        "dataVisita": {"giorno": 20, "mese": 10, "anno": 2025},
-        "dataInizio": {"giorno": 20, "mese": 10, "anno": 2025},
-        "dataFine": {"giorno": 20, "mese": 10, "anno": 2025},
-        "biglietto": false,
-        "orario": "15:00",
-        "durata": "1.5h",
-        "giorniDisponibili": ["Sabato", "Domenica"],
-        "numeroMinimo": 3,
-        "numeroMassimo": 15,
-        "volontario": {"user": "giulia.bianchi"}
-      },
-      {
-        "titolo": "Laboratorio botanico",
-        "descrizione": "Attività di riconoscimento piante",
-        "puntoIncontro": "Serra centrale",
-        "dataVisita": {"giorno": 21, "mese": 10, "anno": 2025},
-        "dataInizio": {"giorno": 21, "mese": 10, "anno": 2025},
-        "dataFine": {"giorno": 21, "mese": 10, "anno": 2025},
-        "biglietto": false,
-        "orario": "11:00",
-        "durata": "2h",
-        "giorniDisponibili": ["Mercoledì"],
-        "numeroMinimo": 5,
-        "numeroMassimo": 20,
-        "volontario": {"user": "luca.verdi"}
-      },
-      {
-        "titolo": "Birdwatching",
-        "descrizione": "Osservazione uccelli con esperto",
-        "puntoIncontro": "Capanno nord",
-        "dataVisita": {"giorno": 23, "mese": 10, "anno": 2025},
-        "dataInizio": {"giorno": 23, "mese": 10, "anno": 2025},
-        "dataFine": {"giorno": 23, "mese": 10, "anno": 2025},
-        "biglietto": true,
-        "orario": "09:00",
-        "durata": "2h",
-        "giorniDisponibili": ["Sabato"],
-        "numeroMinimo": 4,
-        "numeroMassimo": 12,
-        "volontario": {"user": "mario.rossi"}
-      }
-    ]
+    "nome": "vittoria",
+    "descrizione": "ci sono maranza gay",
+    "collocazioneGeografica": "Brescia",
+    "tipiVisita": []
   }
 ]
-

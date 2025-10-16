@@ -1,7 +1,9 @@
 [
   {
     "username": "admin",
-    "password": "admin123"
+    "password": "admin123",
+    "luoghi": [],
+    "volontari": []
   },
   {
     "username": "porcoddio",
@@ -18,6 +20,36 @@
   {
     "username": "provasss",
     "password": "porrrr",
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "prova1233",
+    "password": "prova",
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "spe",
+    "password": "gay",
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "gay",
+    "password": "spe",
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "ema",
+    "password": "ilgay",
+    "luoghi": [],
+    "volontari": []
+  },
+  {
+    "username": "frocio",
+    "password": "didi",
     "luoghi": [],
     "volontari": []
   }

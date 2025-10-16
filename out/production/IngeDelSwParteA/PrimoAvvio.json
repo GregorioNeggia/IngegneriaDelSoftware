@@ -1,4 +1,6 @@
-{
-  "ambitoTerritoriale": "biella",
-  "numMaxIscrizioni": 22
-}
+[
+  {
+    "ambitoTerritoriale": "brescia",
+    "numMaxIscrizioni": 29
+  }
+]
