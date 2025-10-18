@@ -56,7 +56,6 @@ public class GestioneConfiguratori {
 
             } else {
                 credenziali[1] = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
-                InizializzazioneApp();
                 return credenziali;
             }
 
@@ -65,18 +64,7 @@ public class GestioneConfiguratori {
         return null; 
     }
 
-    //  primo accesso
-    public void InizializzazioneApp(){
-        PrimoAvvioData[] dati = Utilità.leggiJsonInArray("PrimoAvvio.json", PrimoAvvioData[].class).toArray(new PrimoAvvioData[0]);
-        PrimoAvvioData avvio = (dati.length > 0) ? dati[0] : new PrimoAvvioData();
 
-        if ("".equals(avvio.getAmbitoTerritoriale())) {
-            avvio.setAmbitoTerritoriale(Utilità.chiediStringaNonVuota( "Indica città di competenza:"));
-            avvio.setNumMaxIscrizioni(Utilità.leggiIntero(scanner, "scrivi il numero massimo di persone che posso iscriversi ad una visita: "));
-        }
-        Utilità.scriviArrayInJson("PrimoAvvio.json", new PrimoAvvioData[]{avvio});
-        System.out.println("Primo avvio avvenuto con successo");
-        }
 
 //    LOGIN
     public Configuratore login (){
@@ -87,10 +75,10 @@ public class GestioneConfiguratori {
         if(username.equals(configuratori.get(0).getUsername()) && password.equals(configuratori.get(0).getPassword())){
             
             String[] credenziali = faiPrimoAccesso();
-            Configuratore nuovoConfiguratore = setupConfiguratore(credenziali[0], credenziali[1]);
+            Configuratore nuovoConfiguratore = new Configuratore(credenziali[0], credenziali[1],null, null);
 
             configuratori.add(nuovoConfiguratore);
-            Utilità.scriviJSonConfiguratori("configuratori.json", configuratori);
+            Utilità.scriviListaInJson("configuratori.json", configuratori);
             System.out.println("Account creato con successo. Login effettuato.");
             return nuovoConfiguratore;
             

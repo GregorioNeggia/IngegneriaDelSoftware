@@ -1,13 +1,14 @@
 
-package Versione1;
+package Versione1.Menu;
 import java.util.*;
 import Versione1.Entità.*;
+import Versione1.Gestori.GestioneApp;
 import Versione1.Gestori.GestioneConfiguratori;
+import Versione1.Utilità;
 
 public class Menu {
     
     public void mostraMenu() {
-        Scanner scanner = new Scanner(System.in);
         int scelta;
         
         do {
@@ -16,23 +17,30 @@ public class Menu {
             System.out.println("2. Stampa configuratori");
             System.out.println("0. Esci");
 
-            scelta = Utilità.leggiIntero(scanner, "Inserisci la tua scelta: ");
+            scelta = Utilità.leggiIntero( "Inserisci la tua scelta: ");
             
             switch(scelta) {
                 case 1:
-                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJSonConfiguratori("configuratori.json"));
+//                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJSonConfiguratori("configuratori.json"));
+                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJsonInLista("configuratori.json", Configuratore.class));
+                    GestioneApp app =  new GestioneApp();
                     Configuratore configuratore = gestione.login();
                     if (configuratore != null) {
                         System.out.println("Login effettuato: " + configuratore.getUsername());
-                        MenuInterno menuInterno = new MenuInterno(configuratore, gestione);
+                        PrimoAvvioData dati = app.InizializzazioneApp();
+                        MenuInterno menuInterno = new MenuInterno(configuratore, gestione, dati);
                         menuInterno.mostraMenuInterno();
                     }
 
                     break;
                 case 2:
-                    List<Configuratore> configuratori = Utilità.leggiJSonConfiguratori("configuratori.json");
+//                    List<Configuratore> configuratori = Utilità.leggiJSonConfiguratori("configuratori.json");
+                    List<Configuratore> configuratori =Utilità.leggiJsonInLista("configuratori.json", Configuratore.class);
                     System.out.println("\n=== CONFIGURATORI REGISTRATI ===");
-                    Utilità.stampaConfiguratori(configuratori);
+//                    Utilità.stampaConfiguratori(configuratori);
+                    for(Configuratore c : configuratori) {
+                        System.out.println(c.toString());
+                    }
                     break;
                 case 0:
                     System.out.println("Arrivederci!");
@@ -41,8 +49,7 @@ public class Menu {
                     System.out.println("Scelta non valida!");
             }
         } while(scelta != 0);
-        
-        scanner.close();
+
     }
 }
 

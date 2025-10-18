@@ -1,0 +1,39 @@
+[
+  {
+    "nome": "Museo Archeologico",
+    "descrizione": "Museo con reperti storici",
+    "tipiVisita": []
+  },
+  {
+    "nome": "castello",
+    "descrizione": "castello di brescia veramente brutto",
+    "collocazioneGeografica": "brescia",
+    "tipiVisita": [
+      {
+        "titolo": "IL CASTELLO BRUTTO IN CULO",
+        "descrizione": "NA MERDA",
+        "puntoIncontro": "CASA DI GREG",
+        "dataInizio": "2026-01-13",
+        "dataFine": "2026-01-18",
+        "giorniSettimanali": [
+          "LUNEDI",
+          "MARTEDI"
+        ],
+        "oraInizio": "05:50:00",
+        "durata": 50,
+        "bigliettoNecessario": true,
+        "partecipantiMin": 40,
+        "partecipantiMax": 40,
+        "volontariAssociati": [
+          "spe"
+        ]
+      }
+    ]
+  },
+  {
+    "nome": "vittoria",
+    "descrizione": "ci sono maranza gay",
+    "collocazioneGeografica": "Brescia",
+    "tipiVisita": []
+  }
+]
