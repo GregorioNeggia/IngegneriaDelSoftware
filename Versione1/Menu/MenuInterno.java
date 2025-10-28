@@ -1,12 +1,8 @@
 package Versione1.Menu;
 
 import Versione1.Entità.*;
-import Versione1.Gestori.GestioneConfiguratori;
-import Versione1.Gestori.GestioneDateEscluse;
-import Versione1.Gestori.GestioneTipoVisita;
+import Versione1.Gestori.*;
 import Versione1.Utilità;
-import Versione1.Gestori.GestioneLuoghi;
-import Versione1.Gestori.GestioneVolontari;
 
 
 public class MenuInterno {
@@ -16,7 +12,8 @@ public class MenuInterno {
     private PrimoAvvioData avvio;
     private GestioneTipoVisita gestioneTipoVisita;
 
-    
+
+
     public MenuInterno(Configuratore conf, GestioneConfiguratori gestore, PrimoAvvioData avvio) {
        this.conf = conf;
        this.gestioneConfiguratori = gestore;
@@ -29,6 +26,7 @@ public class MenuInterno {
             
             System.out.println("\n=== BENVENUTO " + conf.getUsername().toUpperCase() + " ===");
             System.out.println(avvio.toString());
+
 
             do {
                 System.out.println("\n=== MENU CONFIGURATORE ===");
@@ -69,6 +67,8 @@ public class MenuInterno {
         GestioneLuoghi gestioneLuoghi = new GestioneLuoghi();
         GestioneVolontari gestioneVolontari = new GestioneVolontari();
         GestioneTipoVisita gestioneTipoVisita = new GestioneTipoVisita(gestioneLuoghi, gestioneVolontari);
+        GestioneVisite gestioneVisite = new GestioneVisite(gestioneLuoghi, gestioneTipoVisita);
+
 
         boolean esci = false;
 
@@ -77,7 +77,7 @@ public class MenuInterno {
             System.out.println("1. Gestisci luoghi");
             System.out.println("2. Gestisci volontari");
             System.out.println("3. Configura visite (associa luoghi, tipi di visita e volontari)");
-            System.out.println("4. Visualizza configurazione completa");
+            System.out.println("4. Visualizza/gestisci visite calendarizzate");
             System.out.println("5. Torna al menu principale");
             System.out.print("Scegli: ");
 
@@ -94,7 +94,7 @@ public class MenuInterno {
                     gestioneTipoVisita.menu();
                     break;
                 case "4":
-//                    gestioneVisite.visualizzaConfigurazioneCompleta();
+                    gestioneVisite.menu();
                     break;
                 case "5":
                     esci = true;

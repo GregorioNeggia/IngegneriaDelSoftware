@@ -1,0 +1,26 @@
+[
+  {
+    "titoloTipoVisita": "Alla scoperta del Moretto",
+    "nomeLuogo": "Pinacoteca Tosio Martinengo",
+    "dataVisita": "2025-03-23",
+    "volontarioAssegnato": "guida_mario",
+    "stato": "EFFETTUATA",
+    "numeroIscritti": 20
+  },
+  {
+    "titoloTipoVisita": "Tour Cascata del Varone",
+    "nomeLuogo": "Parco Grotta Cascata del Varone",
+    "dataVisita": "2025-04-05",
+    "volontarioAssegnato": "guida_anna",
+    "stato": "EFFETTUATA",
+    "numeroIscritti": 15
+  },
+  {
+    "titoloTipoVisita": "Antichi Borghi di Garda",
+    "nomeLuogo": "Garda Vecchia",
+    "dataVisita": "2025-02-16",
+    "volontarioAssegnato": "guida_pippo",
+    "stato": "EFFETTUATA",
+    "numeroIscritti": 12
+  }
+]
