@@ -140,10 +140,10 @@ public class GestioneLuoghi {
                 .orElse(null);
     }
 
-    public void aggiungiVisitaALuogo(String nomeLuogo, Visita visita) {
+    public void aggiungiVisitaALuogo(String nomeLuogo, TipoVisita tipoVisita) {
         Luogo luogo = trovaLuogoPerNome(nomeLuogo);
         if (luogo != null) {
-            luogo.getTipiVisita().add(visita);
+            luogo.getTipiVisita().add(tipoVisita);
             salva();
         }
     }

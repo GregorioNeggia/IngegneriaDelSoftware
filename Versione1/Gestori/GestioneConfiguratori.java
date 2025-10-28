@@ -129,17 +129,4 @@ public class GestioneConfiguratori {
         System.out.println(c.toString());
     }
 
-    
-
-
-    
-
-
-
-
-
-
-
-
-    
-}
+    }

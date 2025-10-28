@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Visita {
+public class TipoVisita {
     private String titolo;                          // Titolo della visita
     private String descrizione;                     // Descrizione dettagliata
     private String puntoIncontro;                   // Punto di incontro
@@ -19,15 +19,15 @@ public class Visita {
     private int partecipantiMax;                    // Numero massimo partecipanti
     private List<String> volontariAssociati;        // Lista nickname volontari
 
-    public Visita() {
+    public TipoVisita() {
         this.giorniSettimanali = new ArrayList<>();
         this.volontariAssociati = new ArrayList<>();
     }
 
-    public Visita(String titolo, String descrizione, String puntoIncontro,
-                  LocalDate dataInizio, LocalDate dataFine, List<String> giorniSettimanali,
-                  LocalTime oraInizio, int durata, boolean bigliettoNecessario,
-                  int partecipantiMin, int partecipantiMax) {
+    public TipoVisita(String titolo, String descrizione, String puntoIncontro,
+                      LocalDate dataInizio, LocalDate dataFine, List<String> giorniSettimanali,
+                      LocalTime oraInizio, int durata, boolean bigliettoNecessario,
+                      int partecipantiMin, int partecipantiMax) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.puntoIncontro = puntoIncontro;

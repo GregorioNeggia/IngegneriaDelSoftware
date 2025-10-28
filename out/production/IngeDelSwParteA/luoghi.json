@@ -5,11 +5,6 @@
     "tipiVisita": []
   },
   {
-    "nome": "Parco Naturale",
-    "descrizione": "Area verde protetta",
-    "tipiVisita": []
-  },
-  {
     "nome": "castello",
     "descrizione": "castello di brescia veramente brutto",
     "collocazioneGeografica": "brescia",
@@ -34,5 +29,11 @@
         ]
       }
     ]
+  },
+  {
+    "nome": "vittoria",
+    "descrizione": "ci sono maranza gay",
+    "collocazioneGeografica": "Brescia",
+    "tipiVisita": []
   }
 ]

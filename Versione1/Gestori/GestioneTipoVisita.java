@@ -6,12 +6,12 @@ import java.util.*;
 import Versione1.Entità.*;
 import Versione1.Utilità;
 
-public class GestioneVisite {
+public class GestioneTipoVisita {
     private GestioneLuoghi gestioneLuoghi;
     private GestioneVolontari gestioneVolontari;
     private Scanner scanner = new Scanner(System.in);
 
-    public GestioneVisite(GestioneLuoghi gestioneLuoghi, GestioneVolontari gestioneVolontari) {
+    public GestioneTipoVisita(GestioneLuoghi gestioneLuoghi, GestioneVolontari gestioneVolontari) {
         this.gestioneLuoghi = gestioneLuoghi;
         this.gestioneVolontari = gestioneVolontari;
     }
@@ -85,29 +85,27 @@ public class GestioneVisite {
         Luogo luogoScelto = luoghi.get(sceltaLuogo);
 
         // Crea la visita
-        Visita nuovaVisita = costruisciVisita();
-        if (nuovaVisita != null) {
+        TipoVisita nuovaTipoVisita = costruisciVisita();
+        if (nuovaTipoVisita != null) {
             // Associa volontari
-            associaVolontari(nuovaVisita);
+            associaVolontari(nuovaTipoVisita);
 
             // Aggiungi al luogo
-            gestioneLuoghi.aggiungiVisitaALuogo(luogoScelto.getNome(), nuovaVisita);
+            gestioneLuoghi.aggiungiVisitaALuogo(luogoScelto.getNome(), nuovaTipoVisita);
 
             System.out.println("✅ Visita creata e associata a: " + luogoScelto.getNome());
         }
     }
 
-    private Visita costruisciVisita() {
+    private TipoVisita costruisciVisita() {
         try {
             String titolo = Utilità.chiediStringaNonVuota("Titolo della visita: ");
             String descrizione = Utilità.chiediStringaNonVuota("Descrizione: ");
             String puntoIncontro = Utilità.chiediStringaNonVuota("Punto di incontro: ");
 
             // Date
-            String dataInizioStr = Utilità.chiediStringaNonVuota("Data inizio periodo (YYYY-MM-DD): ");
-            String dataFineStr = Utilità.chiediStringaNonVuota("Data fine periodo (YYYY-MM-DD): ");
-            LocalDate dataInizio = LocalDate.parse(dataInizioStr);
-            LocalDate dataFine = LocalDate.parse(dataFineStr);
+            LocalDate dataInizio = Utilità.leggiData("Data inizio Periodo");
+            LocalDate dataFine = LocalDate.parse("Data fine periodo ");
 
             if (dataFine.isBefore(dataInizio)) {
                 System.out.println("❌ Data fine deve essere >= data inizio!");
@@ -118,8 +116,7 @@ public class GestioneVisite {
             List<String> giorni = inserisciGiorni();
 
             // Orario
-            String oraStr = Utilità.chiediStringaNonVuota("Ora inizio (HH:MM): ");
-            LocalTime ora = LocalTime.parse(oraStr);
+            LocalTime ora = Utilità.leggiOrario("Inserisci ora di inizio");
 
             int durata = Utilità.leggiIntero("Durata in minuti: ");
 
@@ -133,7 +130,7 @@ public class GestioneVisite {
                 return null;
             }
 
-            return new Visita(titolo, descrizione, puntoIncontro, dataInizio, dataFine,
+            return new TipoVisita(titolo, descrizione, puntoIncontro, dataInizio, dataFine,
                     giorni, ora, durata, biglietto, minPart, maxPart);
 
         } catch (Exception e) {
@@ -171,7 +168,7 @@ public class GestioneVisite {
         return giorni;
     }
 
-    private void associaVolontari(Visita visita) {
+    private void associaVolontari(TipoVisita tipoVisita) {
         System.out.println("\n--- ASSOCIA VOLONTARI ---");
         gestioneVolontari.visualizzaVolontari();
 
@@ -189,7 +186,7 @@ public class GestioneVisite {
                     String nickname = volontari.get(index).getNickname();
                     if (!volontariScelti.contains(nickname)) {
                         volontariScelti.add(nickname);
-                        gestioneVolontari.aggiungiCompetenzaAVolontario(nickname, visita.getTitolo());
+                        gestioneVolontari.aggiungiCompetenzaAVolontario(nickname, tipoVisita.getTitolo());
                         System.out.println("✅ Associato: " + nickname);
                     }
                 }
@@ -203,12 +200,12 @@ public class GestioneVisite {
             List<String> nicknames = gestioneVolontari.getNicknameVolontari();
             if (!nicknames.isEmpty()) {
                 volontariScelti.add(nicknames.get(0));
-                gestioneVolontari.aggiungiCompetenzaAVolontario(nicknames.get(0), visita.getTitolo());
+                gestioneVolontari.aggiungiCompetenzaAVolontario(nicknames.get(0), tipoVisita.getTitolo());
                 System.out.println("🔄 Associato automaticamente: " + nicknames.get(0));
             }
         }
 
-        visita.setVolontariAssociati(volontariScelti);
+        tipoVisita.setVolontariAssociati(volontariScelti);
     }
 
     private void visualizzaTutteLeVisite() {
@@ -218,10 +215,10 @@ public class GestioneVisite {
         for (Luogo luogo : gestioneLuoghi.getLuoghi()) {
             if (!luogo.getTipiVisita().isEmpty()) {
                 System.out.println("\n📍 " + luogo.getNome() + ":");
-                for (Visita visita : luogo.getTipiVisita()) {
-                    System.out.println("  🎯 " + visita.getTitolo());
-                    System.out.println("     📅 " + visita.getDataInizio() + " - " + visita.getDataFine());
-                    System.out.println("     👥 " + visita.getVolontariAssociati());
+                for (TipoVisita tipoVisita : luogo.getTipiVisita()) {
+                    System.out.println("  🎯 " + tipoVisita.getTitolo());
+                    System.out.println("     📅 " + tipoVisita.getDataInizio() + " - " + tipoVisita.getDataFine());
+                    System.out.println("     👥 " + tipoVisita.getVolontariAssociati());
                 }
                 trovatoVisite = true;
             }
@@ -258,16 +255,16 @@ public class GestioneVisite {
             if (luogo.getTipiVisita().isEmpty()) {
                 System.out.println("   ⚠️ Nessuna visita configurata");
             } else {
-                for (Visita visita : luogo.getTipiVisita()) {
-                    System.out.println("\n   🎯 " + visita.getTitolo());
-                    System.out.println("      📝 " + visita.getDescrizione());
-                    System.out.println("      📍 Incontro: " + visita.getPuntoIncontro());
-                    System.out.println("      📅 Periodo: " + visita.getDataInizio() + " - " + visita.getDataFine());
-                    System.out.println("      📆 Giorni: " + visita.getGiorniSettimanali());
-                    System.out.println("      🕐 Orario: " + visita.getOraInizio() + " (" + visita.getDurata() + " min)");
-                    System.out.println("      👥 Partecipanti: " + visita.getPartecipantiMin() + "-" + visita.getPartecipantiMax());
-                    System.out.println("      🎫 Biglietto: " + (visita.isBigliettoNecessario() ? "Sì" : "No"));
-                    System.out.println("      👨‍💼 Volontari: " + visita.getVolontariAssociati());
+                for (TipoVisita tipoVisita : luogo.getTipiVisita()) {
+                    System.out.println("\n   🎯 " + tipoVisita.getTitolo());
+                    System.out.println("      📝 " + tipoVisita.getDescrizione());
+                    System.out.println("      📍 Incontro: " + tipoVisita.getPuntoIncontro());
+                    System.out.println("      📅 Periodo: " + tipoVisita.getDataInizio() + " - " + tipoVisita.getDataFine());
+                    System.out.println("      📆 Giorni: " + tipoVisita.getGiorniSettimanali());
+                    System.out.println("      🕐 Orario: " + tipoVisita.getOraInizio() + " (" + tipoVisita.getDurata() + " min)");
+                    System.out.println("      👥 Partecipanti: " + tipoVisita.getPartecipantiMin() + "-" + tipoVisita.getPartecipantiMax());
+                    System.out.println("      🎫 Biglietto: " + (tipoVisita.isBigliettoNecessario() ? "Sì" : "No"));
+                    System.out.println("      👨‍💼 Volontari: " + tipoVisita.getVolontariAssociati());
                 }
             }
         }

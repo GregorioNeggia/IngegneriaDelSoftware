@@ -3,13 +3,10 @@ package Versione1.Menu;
 import Versione1.Entità.*;
 import Versione1.Gestori.GestioneConfiguratori;
 import Versione1.Gestori.GestioneDateEscluse;
-import Versione1.Gestori.GestioneVisite;
+import Versione1.Gestori.GestioneTipoVisita;
 import Versione1.Utilità;
 import Versione1.Gestori.GestioneLuoghi;
 import Versione1.Gestori.GestioneVolontari;
-
-import java.util.*;
-
 
 
 public class MenuInterno {
@@ -17,13 +14,13 @@ public class MenuInterno {
     private Configuratore conf;
     private GestioneConfiguratori gestioneConfiguratori;
     private PrimoAvvioData avvio;
-    private GestioneVisite gestioneVisite;
+    private GestioneTipoVisita gestioneTipoVisita;
 
     
     public MenuInterno(Configuratore conf, GestioneConfiguratori gestore, PrimoAvvioData avvio) {
        this.conf = conf;
        this.gestioneConfiguratori = gestore;
-       this.gestioneVisite = gestioneVisite;
+       this.gestioneTipoVisita = gestioneTipoVisita;
        this.avvio = avvio;
     }
 
@@ -71,7 +68,7 @@ public class MenuInterno {
         // Inizializza i gestori
         GestioneLuoghi gestioneLuoghi = new GestioneLuoghi();
         GestioneVolontari gestioneVolontari = new GestioneVolontari();
-        GestioneVisite gestioneVisite = new GestioneVisite(gestioneLuoghi, gestioneVolontari);
+        GestioneTipoVisita gestioneTipoVisita = new GestioneTipoVisita(gestioneLuoghi, gestioneVolontari);
 
         boolean esci = false;
 
@@ -94,7 +91,7 @@ public class MenuInterno {
                     gestioneVolontari.menu();
                     break;
                 case "3":
-                    gestioneVisite.menu();
+                    gestioneTipoVisita.menu();
                     break;
                 case "4":
 //                    gestioneVisite.visualizzaConfigurazioneCompleta();
