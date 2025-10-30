@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import com.google.gson.*;
-import Versione1.Entità.*;
 import com.google.gson.reflect.TypeToken;
 
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.io.*;
 
 
-public class Utilità {
+public class Utilita {
 
 
     //    ATTRIBUTI
@@ -24,13 +23,10 @@ public class Utilità {
 
     //    METODI DI UTILITA GENERALE
     public static String chiediStringa(String messaggio) {
-        System.out.print(messaggio + ": ");
+        System.out.print(messaggio + " ");
         return scanner.nextLine();
     }
 
-    public static String chiediStringa() {
-        return chiediStringa("Inserisci una stringa");
-    }
 
 
     public static String chiediStringaNonVuota(String messaggio) {

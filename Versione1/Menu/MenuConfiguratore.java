@@ -2,10 +2,10 @@ package Versione1.Menu;
 
 import Versione1.Entità.*;
 import Versione1.Gestori.*;
-import Versione1.Utilità;
+import Versione1.Utilita;
 
 
-public class MenuInterno {
+public class MenuConfiguratore {
 
     private Configuratore conf;
     private GestioneConfiguratori gestioneConfiguratori;
@@ -14,14 +14,14 @@ public class MenuInterno {
 
 
 
-    public MenuInterno(Configuratore conf, GestioneConfiguratori gestore, PrimoAvvioData avvio) {
+    public MenuConfiguratore(Configuratore conf, GestioneConfiguratori gestore, PrimoAvvioData avvio) {
        this.conf = conf;
        this.gestioneConfiguratori = gestore;
        this.gestioneTipoVisita = gestioneTipoVisita;
        this.avvio = avvio;
     }
 
-    public void mostraMenuInterno() {
+    public void mostraMenuConfiguratore() {
             int scelta;
             
             System.out.println("\n=== BENVENUTO " + conf.getUsername().toUpperCase() + " ===");
@@ -30,22 +30,21 @@ public class MenuInterno {
 
             do {
                 System.out.println("\n=== MENU CONFIGURATORE ===");
-                System.out.println("1. Setup configuratore");
-                System.out.println("2. Setup visite");
-                System.out.println("3. Escludi date per il terzo mese");
+                System.out.println("1. modificare il numero massimo di iscritti per evento");
+                System.out.println("2. gestisci visite luoghi volontari");
+                System.out.println("3. Escludi date per il terzo mese da oggi");
                 System.out.println("0. Logout");
 
-                scelta = Utilità.leggiIntero( "Inserisci la tua scelta: ");
+                scelta = Utilita.leggiIntero( "Inserisci la tua scelta: ");
 
                 switch(scelta) {
                     case 1:
-                        gestioneConfiguratori.modificaConfiguratore(conf);
+                        gestioneConfiguratori.modificaNumMaxIscrizioni(conf);
                         break;
                     case 2:
-                        setupVisite();
+                        gestioneTipoVisiteLuoghi();
                         break;
                     case 3:
-                        System.out.println("caso 3");
                         GestioneDateEscluse gestioneDateEscluse=new GestioneDateEscluse();
                         gestioneDateEscluse.menu();
                         break;
@@ -59,7 +58,7 @@ public class MenuInterno {
 
     }
 
-    private void setupVisite() {
+    private void gestioneTipoVisiteLuoghi() {
         System.out.println("\n=== SETUP INIZIALE VISITE ===");
         System.out.println("Configurazione dell'insieme di luoghi da destinare a visite guidate");
 
@@ -76,12 +75,12 @@ public class MenuInterno {
             System.out.println("\n--- MENU SETUP VISITE ---");
             System.out.println("1. Gestisci luoghi");
             System.out.println("2. Gestisci volontari");
-            System.out.println("3. Configura visite (associa luoghi, tipi di visita e volontari)");
+            System.out.println("3. Configura tipo visite (associa luoghi, tipi di visita e volontari)");
             System.out.println("4. Visualizza/gestisci visite calendarizzate");
             System.out.println("5. Torna al menu principale");
             System.out.print("Scegli: ");
 
-            String scelta = Utilità.chiediStringa();
+            String scelta = Utilita.chiediStringaNonVuota("");
 
             switch (scelta) {
                 case "1":

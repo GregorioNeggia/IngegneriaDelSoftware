@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Versione1.Entità.Periodo;
-import Versione1.Utilità;
+import Versione1.Utilita;
 
 public class GestioneDateEscluse {
     private ArrayList<LocalDate> dateEscluse;
-    private String nomeFile = "date_escluse.json";
+    private String nomeFile = "Versione1/Database/date_escluse.json";
 
     public GestioneDateEscluse() {
-        this.dateEscluse = (ArrayList<LocalDate>) Utilità.leggiJsonInLista(nomeFile, LocalDate.class);
+        this.dateEscluse = (ArrayList<LocalDate>) Utilita.leggiJsonInLista(nomeFile, LocalDate.class);
     }
 
     public void aggiungiDateEscluse() {
@@ -26,7 +26,7 @@ public class GestioneDateEscluse {
         System.out.println("Periodo valido: dal " + periodoIPiuTre.getInizio() + " al " + periodoIPiuTre.getFine());
 
         while (true) {
-            String input = Utilità.chiediStringa("Inserisci data da escludere (YYYY-MM-DD) o 'fine' per terminare: ");
+            String input = Utilita.chiediStringa("Inserisci data da escludere (YYYY-MM-DD) o 'fine' per terminare: ");
 
             if (input.equals("fine")) break;
 
@@ -48,7 +48,7 @@ public class GestioneDateEscluse {
             }
         }
 
-        Utilità.scriviListaInJson(nomeFile, dateEscluse);
+        Utilita.scriviListaInJson(nomeFile, dateEscluse);
     }
 
     public void visualizzaDate() {
@@ -72,7 +72,7 @@ public class GestioneDateEscluse {
             System.out.println("2. Visualizza date escluse");
             System.out.println("3. Esci");
 
-            String scelta = Utilità.chiediStringa("Scegli: ");
+            String scelta = Utilita.chiediStringa("Scegli: ");
 
 
             switch (scelta) {

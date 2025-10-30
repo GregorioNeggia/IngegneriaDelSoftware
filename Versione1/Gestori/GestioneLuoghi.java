@@ -2,15 +2,15 @@ package Versione1.Gestori;
 
 import java.util.*;
 import Versione1.Entità.*;
-import Versione1.Utilità;
+import Versione1.Utilita;
 
 public class GestioneLuoghi {
     private List<Luogo> luoghi;
-    private String nomeFile = "luoghi.json";
+    private String nomeFile = "Versione1/Database/luoghi.json";
     private Scanner scanner = new Scanner(System.in);
 
     public GestioneLuoghi() {
-        this.luoghi = Utilità.leggiJsonInLista(nomeFile, Luogo.class);
+        this.luoghi = Utilita.leggiJsonInLista(nomeFile, Luogo.class);
     }
 
     public void menu() {
@@ -51,20 +51,20 @@ public class GestioneLuoghi {
 
     private void aggiungiLuogo() {
         System.out.println("\n--- AGGIUNGI NUOVO LUOGO ---");
-        String nome = Utilità.chiediStringaNonVuota("Nome del luogo: ");
+        String nome = Utilita.chiediStringaNonVuota("Nome del luogo: ");
 
         if (trovaLuogoPerNome(nome) != null) {
             System.out.println("❌ Luogo già esistente!");
             return;
         }
 
-        String descrizione = Utilità.chiediStringaNonVuota("Descrizione: ");
-        String collocazione = Utilità.chiediStringaNonVuota("Collocazione geografica: ");
+        String descrizione = Utilita.chiediStringaNonVuota("Descrizione: ");
+        String collocazione = Utilita.chiediStringaNonVuota("Collocazione geografica: ");
 
         Luogo nuovoLuogo = new Luogo(nome, descrizione, collocazione);
         luoghi.add(nuovoLuogo);
 
-        System.out.println("✅ Luogo aggiunto!");
+        System.out.println("Luogo aggiunto!");
         salva();
     }
 
@@ -77,9 +77,9 @@ public class GestioneLuoghi {
 
         for (int i = 0; i < luoghi.size(); i++) {
             Luogo luogo = luoghi.get(i);
-            System.out.println((i + 1) + ". 📍 " + luogo.getNome());
-            System.out.println("   📝 " + luogo.getDescrizione());
-            System.out.println("   📌 " + luogo.getCollocazioneGeografica());
+            System.out.println((i + 1) + "\n nome luogo: " + luogo.getNome());
+            System.out.println("descrizione: " + luogo.getDescrizione());
+            System.out.println("dove si trova: " + luogo.getCollocazioneGeografica());
         }
     }
 
@@ -90,19 +90,19 @@ public class GestioneLuoghi {
         }
 
         visualizzaLuoghi();
-        int scelta = Utilità.leggiIntero("Scegli il luogo da modificare: ") - 1;
+        int scelta = Utilita.leggiIntero("Scegli il luogo da modificare: ") - 1;
 
         if (scelta >= 0 && scelta < luoghi.size()) {
             Luogo luogo = luoghi.get(scelta);
             System.out.println("Modifica di: " + luogo.getNome());
 
-            String nuovaDescrizione = Utilità.chiediStringaNonVuota("Nuova descrizione (attuale: " + luogo.getDescrizione() + "): ");
-            String nuovaCollocazione = Utilità.chiediStringaNonVuota("Nuova collocazione (attuale: " + luogo.getCollocazioneGeografica() + "): ");
+            String nuovaDescrizione = Utilita.chiediStringaNonVuota("Nuova descrizione (attuale: " + luogo.getDescrizione() + "): ");
+            String nuovaCollocazione = Utilita.chiediStringaNonVuota("Nuova collocazione (attuale: " + luogo.getCollocazioneGeografica() + "): ");
 
             luogo.setDescrizione(nuovaDescrizione);
             luogo.setCollocazioneGeografica(nuovaCollocazione);
 
-            System.out.println("✅ Luogo modificato!");
+            System.out.println("Luogo modificato!");
             salva();
         }
     }
@@ -114,15 +114,15 @@ public class GestioneLuoghi {
         }
 
         visualizzaLuoghi();
-        int scelta = Utilità.leggiIntero("Scegli il luogo da eliminare: ") - 1;
+        int scelta = Utilita.leggiIntero("Scegli il luogo da eliminare: ") - 1;
 
         if (scelta >= 0 && scelta < luoghi.size()) {
             Luogo luogo = luoghi.get(scelta);
-            String conferma = Utilità.chiediStringaNonVuota("Confermi eliminazione di '" + luogo.getNome() + "'? (si/no): ");
+            String conferma = Utilita.chiediStringaNonVuota("Confermi eliminazione di '" + luogo.getNome() + "'? (si/no): ");
 
             if (conferma.equalsIgnoreCase("si")) {
                 luoghi.remove(scelta);
-                System.out.println("✅ Luogo eliminato!");
+                System.out.println("Luogo eliminato!");
                 salva();
             }
         }
@@ -149,33 +149,10 @@ public class GestioneLuoghi {
     }
 
     private void salva() {
-        Utilità.scriviListaInJson(nomeFile, luoghi);
+        Utilita.scriviListaInJson(nomeFile, luoghi);
     }
 }
 
-/*package Versione1.Gestori;
-
-import Versione1.Entità.Luogo;
-import Versione1.Utilità;
-import java.util.*;
-
-
-public class GestioneLuoghi {
 
 
 
-    public Luogo creaLuogo(){
-        String nome = Utilità.chiediStringaNonVuota("INSERISCI IL NOME DEL LUOGO: \n");
-        String descrizione = Utilità.chiediStringaNonVuota("INSERISCI LA DESCRIZIONE: \n");
-        String posizione = Utilità.chiediStringaNonVuota("INSERISCI POSIZIONE: \n");
-
-
-
-        return new Luogo(nome, descrizione, posizione, null);
-    }
-
-
-
-
-
-}*/

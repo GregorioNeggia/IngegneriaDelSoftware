@@ -1,11 +1,8 @@
 package Versione1.Gestori;
-import java.io.ObjectInputFilter.Config;
 import java.util.*;
 
-import Versione1.Utilità;
+import Versione1.Utilita;
 import Versione1.Entità.*;
-
-import static Versione1.Utilità.scanner;
 
 
 public class GestioneConfiguratori {
@@ -41,7 +38,7 @@ public class GestioneConfiguratori {
         String[] credenziali = new String[2];
 
         do{
-            credenziali[0] = Utilità.chiediStringaNonVuota(RICHIESTA_USER);
+            credenziali[0] = Utilita.chiediStringaNonVuota(RICHIESTA_USER);
 
             boolean usernameEsistente = false;
             for(Configuratore c : configuratori){
@@ -55,7 +52,7 @@ public class GestioneConfiguratori {
                 System.out.println("Errore: Username già esistente. Riprova.");
 
             } else {
-                credenziali[1] = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
+                credenziali[1] = Utilita.chiediStringaNonVuota(RICHIESTA_PASSWORD);
                 return credenziali;
             }
 
@@ -69,8 +66,8 @@ public class GestioneConfiguratori {
 //    LOGIN
     public Configuratore login (){
 
-        String username = Utilità.chiediStringaNonVuota(RICHIESTA_USER);
-        String password = Utilità.chiediStringaNonVuota(RICHIESTA_PASSWORD);
+        String username = Utilita.chiediStringaNonVuota(RICHIESTA_USER);
+        String password = Utilita.chiediStringaNonVuota(RICHIESTA_PASSWORD);
 
         if(username.equals(configuratori.get(0).getUsername()) && password.equals(configuratori.get(0).getPassword())){
             
@@ -78,7 +75,7 @@ public class GestioneConfiguratori {
             Configuratore nuovoConfiguratore = new Configuratore(credenziali[0], credenziali[1],null, null);
 
             configuratori.add(nuovoConfiguratore);
-            Utilità.scriviListaInJson("configuratori.json", configuratori);
+            Utilita.scriviListaInJson("Versione1/Database/configuratori.json", configuratori);
             System.out.println("Account creato con successo. Login effettuato.");
             return nuovoConfiguratore;
             
@@ -95,38 +92,25 @@ public class GestioneConfiguratori {
     }
 
 
+    public void modificaNumMaxIscrizioni(Configuratore c){
+        System.out.println("Modifica tantum- num iscritti");
 
+        String nomeFile = "Versione1/Database/PrimoAvvio.json";
 
+        // Carica i dati esistenti dal file JSON
+        List<PrimoAvvioData> listaDati = Utilita.leggiJsonInLista(nomeFile, PrimoAvvioData.class);
+        PrimoAvvioData dati;
+        dati = listaDati.get(0);
 
-    //DA MODIFICARE PER IMPLEMENTARE LA CREAZIONE DI LUOGHI E VOLONTARI
-    public Configuratore setupConfiguratore(String username, String password){
-        boolean fine = false;
-        List<Luogo> luoghi = new ArrayList<>();
-        List<Volontario> volontari = new ArrayList<>();
-        try{
-            while(!fine){}
+        System.out.println("Num max iscritti impostato a:" + dati.getNumMaxIscrizioni());
+        int numMaxIscrizioni = Utilita.leggiIntero("inserisci il nuovo massimo di iscritti: \n");
+        dati.setNumMaxIscrizioni(numMaxIscrizioni);
+        Utilita.scriviListaInJson(nomeFile, listaDati);
 
-
-
-
-        }
-        catch(Exception e){
-            System.out.println("Errore durante la creazione del configuratore: " + e.getMessage());
-        }
-
-        return new Configuratore(username, password, luoghi, volontari);
-    }
-
-    
-
-    public void modificaConfiguratore(Configuratore c){
+        System.out.println("cap massimo di iscritti modificato a: "+ dati.getNumMaxIscrizioni());
 
     }
 
     
 
-    public void stampaInfo(Configuratore c){
-        System.out.println(c.toString());
-    }
-
-    }
+}

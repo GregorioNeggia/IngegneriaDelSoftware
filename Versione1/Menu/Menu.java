@@ -1,46 +1,24 @@
 
 package Versione1.Menu;
-import java.util.*;
 import Versione1.Entità.*;
 import Versione1.Gestori.GestioneApp;
 import Versione1.Gestori.GestioneConfiguratori;
-import Versione1.Utilità;
+import Versione1.Utilita;
 
 public class Menu {
-    
+
     public void mostraMenu() {
         int scelta;
-        
         do {
             System.out.println("\n=== MENU ===");
-            System.out.println("1. Login");
-            System.out.println("2. Stampa configuratori");
+            System.out.println("1. Login Configuratore");
             System.out.println("0. Esci");
 
-            scelta = Utilità.leggiIntero( "Inserisci la tua scelta: ");
-            
+            scelta = Utilita.leggiIntero( "Inserisci la tua scelta: ");
+
             switch(scelta) {
                 case 1:
-//                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJSonConfiguratori("configuratori.json"));
-                    GestioneConfiguratori gestione = new GestioneConfiguratori(Utilità.leggiJsonInLista("configuratori.json", Configuratore.class));
-                    GestioneApp app =  new GestioneApp();
-                    Configuratore configuratore = gestione.login();
-                    if (configuratore != null) {
-                        System.out.println("Login effettuato: " + configuratore.getUsername());
-                        PrimoAvvioData dati = app.InizializzazioneApp();
-                        MenuInterno menuInterno = new MenuInterno(configuratore, gestione, dati);
-                        menuInterno.mostraMenuInterno();
-                    }
-
-                    break;
-                case 2:
-//                    List<Configuratore> configuratori = Utilità.leggiJSonConfiguratori("configuratori.json");
-                    List<Configuratore> configuratori =Utilità.leggiJsonInLista("configuratori.json", Configuratore.class);
-                    System.out.println("\n=== CONFIGURATORI REGISTRATI ===");
-//                    Utilità.stampaConfiguratori(configuratori);
-                    for(Configuratore c : configuratori) {
-                        System.out.println(c.toString());
-                    }
+                    loginConfiguratore();
                     break;
                 case 0:
                     System.out.println("Arrivederci!");
@@ -50,6 +28,18 @@ public class Menu {
             }
         } while(scelta != 0);
 
+    }
+
+    private static void loginConfiguratore() {
+        GestioneConfiguratori gestioneConf = new GestioneConfiguratori(Utilita.leggiJsonInLista("Versione1/Database/configuratori.json", Configuratore.class));
+        GestioneApp app =  new GestioneApp();
+        Configuratore configuratore = gestioneConf.login();
+        if (configuratore != null) {
+            System.out.println("Login effettuato: " + configuratore.getUsername());
+            PrimoAvvioData dati = app.InizializzazioneApp();
+            MenuConfiguratore menuConfiguratore = new MenuConfiguratore(configuratore, gestioneConf, dati);
+            menuConfiguratore.mostraMenuConfiguratore();
+        }
     }
 }
 

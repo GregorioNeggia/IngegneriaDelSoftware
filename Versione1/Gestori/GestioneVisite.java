@@ -1,22 +1,18 @@
 package Versione1.Gestori;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import Versione1.Entità.*;
-import Versione1.Utilità;
+import Versione1.Utilita;
 
 public class GestioneVisite {
-    private List<Visita> visite;                    // Visite correnti
-    private List<Visita> archivioStorico;           // Visite effettuate
+    private List<Visita> visite;           // Visite effettuate
     private GestioneLuoghi gestioneLuoghi;          // Per accedere ai luoghi
     private GestioneTipoVisita gestioneTipoVisita;  // Per accedere ai tipi di visita
-    private String nomeFileVisite = "visite.json";
-    private String nomeFileArchivio = "archivio_storico.json";
+    private String nomeFileVisite = "Versione1/Database/visite.json";
 
     public GestioneVisite(GestioneLuoghi gestioneLuoghi, GestioneTipoVisita gestioneTipoVisita) {
-        this.visite = Utilità.leggiJsonInLista(nomeFileVisite, Visita.class);
-        this.archivioStorico = Utilità.leggiJsonInLista(nomeFileArchivio, Visita.class);
+        this.visite = Utilita.leggiJsonInLista(nomeFileVisite, Visita.class);
         this.gestioneLuoghi = gestioneLuoghi;
         this.gestioneTipoVisita = gestioneTipoVisita;
     }
@@ -28,11 +24,11 @@ public class GestioneVisite {
             System.out.println("\n=== GESTIONE VISITE CALENDARIZZATE ===");
             System.out.println("1. Visualizza visite per stato");
             System.out.println("2. Cambia stato visita");
-            System.out.println("3. Visualizza archivio storico");
+            System.out.println("3. Visualizza visite");
             System.out.println("4. Esci");
             System.out.print("Scegli: ");
 
-            int scelta = Utilità.leggiIntero("");
+            int scelta = Utilita.leggiIntero("");
 
             switch (scelta) {
                 case 1:
@@ -42,7 +38,7 @@ public class GestioneVisite {
                     cambiaStatoVisita();
                     break;
                 case 3:
-                    visualizzaArchivioStorico();
+                    visualizzaVisite();
                     break;
                 case 4:
                     esci = true;
@@ -59,30 +55,22 @@ public class GestioneVisite {
         System.out.println("2. COMPLETA");
         System.out.println("3. CONFERMATA");
         System.out.println("4. CANCELLATA");
-        System.out.println("5. EFFETTUATA (archivio)");
-        System.out.println("6. Tutte (escluso archivio)");
+        System.out.println("5. EFFETTUATA ");
+        System.out.println("6. Tutte");
 
-        int scelta = Utilità.leggiIntero("Scegli stato: ");
+        int scelta = Utilita.leggiIntero("Scegli stato: ");
         StatoVisita filtro = null;
-        boolean mostraArchivio = false;
 
         switch (scelta) {
             case 1: filtro = StatoVisita.PROPOSTA; break;
             case 2: filtro = StatoVisita.COMPLETA; break;
             case 3: filtro = StatoVisita.CONFERMATA; break;
             case 4: filtro = StatoVisita.CANCELLATA; break;
-            case 5:
-                mostraArchivio = true;
-                break;
+            case 5: filtro = StatoVisita.EFFETTUATA; break;
             case 6: filtro = null; break;
             default:
                 System.out.println("Scelta non valida!");
                 return;
-        }
-
-        if (mostraArchivio) {
-            visualizzaArchivioStorico();
-            return;
         }
 
         final StatoVisita filtroFinale = filtro;
@@ -116,7 +104,7 @@ public class GestioneVisite {
             System.out.println((i + 1) + ". " + visite.get(i));
         }
 
-        int scelta = Utilità.leggiIntero("Scegli visita: ") - 1;
+        int scelta = Utilita.leggiIntero("Scegli visita: ") - 1;
         if (scelta < 0 || scelta >= visite.size()) {
             System.out.println("Scelta non valida!");
             return;
@@ -129,9 +117,9 @@ public class GestioneVisite {
         System.out.println("2. COMPLETA");
         System.out.println("3. CONFERMATA");
         System.out.println("4. CANCELLATA");
-        System.out.println("5. EFFETTUATA (sposta in archivio)");
+        System.out.println("5. EFFETTUATA");
 
-        int nuovoStato = Utilità.leggiIntero("Scegli: ");
+        int nuovoStato = Utilita.leggiIntero("Scegli: ");
 
         switch (nuovoStato) {
             case 1:
@@ -148,11 +136,6 @@ public class GestioneVisite {
                 break;
             case 5:
                 visita.setStato(StatoVisita.EFFETTUATA);
-                archivioStorico.add(visita);
-                visite.remove(scelta);
-                System.out.println("✅ Visita spostata nell'archivio storico");
-                salvaArchivio();
-                salvaVisite();
                 return;
             default:
                 System.out.println("Scelta non valida!");
@@ -163,16 +146,11 @@ public class GestioneVisite {
         salvaVisite();
     }
 
-    private void visualizzaArchivioStorico() {
-        System.out.println("\n=== ARCHIVIO STORICO - VISITE EFFETTUATE ===");
+    private void visualizzaVisite() {
+        System.out.println("\n=== VISITE TOTALI ===");
 
-        if (archivioStorico.isEmpty()) {
-            System.out.println("Nessuna visita nell'archivio.");
-            return;
-        }
-
-        for (int i = 0; i < archivioStorico.size(); i++) {
-            Visita v = archivioStorico.get(i);
+        for (int i = 0; i < visite.size(); i++) {
+            Visita v = visite.get(i);
             System.out.println((i + 1) + ". " + v);
             System.out.println("   Volontario: " + v.getVolontarioAssegnato());
             System.out.println("   Partecipanti: " + v.getNumeroIscritti());
@@ -180,11 +158,7 @@ public class GestioneVisite {
     }
 
     private void salvaVisite() {
-        Utilità.scriviListaInJson(nomeFileVisite, visite);
-    }
-
-    private void salvaArchivio() {
-        Utilità.scriviListaInJson(nomeFileArchivio, archivioStorico);
+        Utilita.scriviListaInJson(nomeFileVisite, visite);
     }
 
     public List<Visita> getVisite() {

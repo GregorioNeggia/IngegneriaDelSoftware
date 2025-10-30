@@ -1,0 +1,38 @@
+[
+  {
+    "nome": "Museo Archeologico",
+    "descrizione": "Museo con reperti storici",
+    "tipiTipoVisita": [
+      {
+        "titolo": "s",
+        "descrizione": "s",
+        "puntoIncontro": "s",
+        "dataInizio": "2025-01-25",
+        "dataFine": "2026-01-25",
+        "giorniSettimanali": [
+          "LUNEDI"
+        ],
+        "oraInizio": "14:20:00",
+        "durata": 40,
+        "bigliettoNecessario": true,
+        "partecipantiMin": 20,
+        "partecipantiMax": 30,
+        "volontariAssociati": [
+          "spe"
+        ]
+      }
+    ]
+  },
+  {
+    "nome": "castello",
+    "descrizione": "castello di brescia veramente brutto",
+    "collocazioneGeografica": "brescia",
+    "tipiTipoVisita": []
+  },
+  {
+    "nome": "vittoria",
+    "descrizione": "ci sono maranza gay",
+    "collocazioneGeografica": "Brescia",
+    "tipiTipoVisita": []
+  }
+]

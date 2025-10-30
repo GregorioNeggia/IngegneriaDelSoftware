@@ -2,15 +2,15 @@ package Versione1.Gestori;
 
 import java.util.*;
 import Versione1.Entità.*;
-import Versione1.Utilità;
+import Versione1.Utilita;
 
 public class GestioneVolontari {
     private List<Volontario> volontari;
-    private String nomeFile = "volontari.json";
+    private String nomeFile = "Versione1/Database/volontari.json";
     private Scanner scanner = new Scanner(System.in);
 
     public GestioneVolontari() {
-        this.volontari = Utilità.leggiJsonInLista(nomeFile, Volontario.class);
+        this.volontari = Utilita.leggiJsonInLista(nomeFile, Volontario.class);
     }
 
     public void menu() {
@@ -55,7 +55,7 @@ public class GestioneVolontari {
 
     private void aggiungiVolontario() {
         System.out.println("\n--- AGGIUNGI VOLONTARIO ---");
-        String nickname = Utilità.chiediStringaNonVuota("Nickname del volontario: ");
+        String nickname = Utilita.chiediStringaNonVuota("Nickname del volontario: ");
 
         if (trovaVolontarioPerNickname(nickname) != null) {
             System.out.println("❌ Volontario già esistente!");
@@ -90,11 +90,11 @@ public class GestioneVolontari {
         }
 
         visualizzaVolontari();
-        int scelta = Utilità.leggiIntero("Scegli il volontario da modificare: ") - 1;
+        int scelta = Utilita.leggiIntero("Scegli il volontario da modificare: ") - 1;
 
         if (scelta >= 0 && scelta < volontari.size()) {
             Volontario vol = volontari.get(scelta);
-            String nuovoNickname = Utilità.chiediStringaNonVuota("Nuovo nickname (attuale: " + vol.getNickname() + "): ");
+            String nuovoNickname = Utilita.chiediStringaNonVuota("Nuovo nickname (attuale: " + vol.getNickname() + "): ");
 
             if (!nuovoNickname.equals(vol.getNickname()) && trovaVolontarioPerNickname(nuovoNickname) != null) {
                 System.out.println("❌ Nickname già esistente!");
@@ -114,11 +114,11 @@ public class GestioneVolontari {
         }
 
         visualizzaVolontari();
-        int scelta = Utilità.leggiIntero("Scegli il volontario da eliminare: ") - 1;
+        int scelta = Utilita.leggiIntero("Scegli il volontario da eliminare: ") - 1;
 
         if (scelta >= 0 && scelta < volontari.size()) {
             Volontario vol = volontari.get(scelta);
-            String conferma = Utilità.chiediStringaNonVuota("Confermi eliminazione di '" + vol.getNickname() + "'? (si/no): ");
+            String conferma = Utilita.chiediStringaNonVuota("Confermi eliminazione di '" + vol.getNickname() + "'? (si/no): ");
 
             if (conferma.equalsIgnoreCase("si")) {
                 volontari.remove(scelta);
@@ -169,7 +169,7 @@ public class GestioneVolontari {
     }
 
     private void salva() {
-        Utilità.scriviListaInJson(nomeFile, volontari);
+        Utilita.scriviListaInJson(nomeFile, volontari);
     }
 }
 
